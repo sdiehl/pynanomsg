@@ -2,17 +2,17 @@ cdef extern from "sp/sp.h" nogil:
     enum: AF_SP # 1
     enum: AF_SP_RAW # 2
 
-    #  Socket protocols.                                                         */
+    #  Socket protocols.
     enum: SP_PAIR # 1
     enum: SP_PUB  # 2
     enum: SP_SUB  # 3
     enum: SP_REP  # 4
     enum: SP_REQ  # 5
 
-    #  Socket option levels.                                                     */
+    #  Socket option levels.
     enum: SP_SOL_SOCKET # 1
 
-    # Send/recv options.                                                        */
+    # Send/recv options.
     enum: SP_DONTWAIT # 1
 
     # Socket options
