@@ -34,3 +34,12 @@ msg = 'ABC'
 sock_a.send(msg)
 sock_b.recv(3)
 ```
+
+License
+-------
+
+Released under the MIT license.
+
+This library and nanomsg are very early projects. They may cause bad
+things to happen ( segfaults, rising of the undead, etc ) for which I am
+not responsible.
