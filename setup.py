@@ -28,12 +28,10 @@ setup(
     author_email='stephen.m.diehl@gmail.com',
     description='Python bindings for nanomsg',
     data_files=[],
-    entry_points={},
     license='MIT',
     platforms = ['any'],
     classifiers=[],
     packages='pynanomsg',
-    install_requires=[''],
     cmdclass = {
         'build_ext' : build_ext,
     },
