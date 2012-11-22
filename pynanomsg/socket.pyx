@@ -85,7 +85,7 @@ cdef class Socket:
         cdef char* buf = <char*>malloc(sizeof(char) * length)
         try:
             with nogil:
-                rc = sp_recv(self.handle, buf, 3, flags);
+                rc = sp_recv(self.handle, buf, length, flags);
             msg = PyString_FromStringAndSize(buf, length)
             assert rc > -1
             return msg

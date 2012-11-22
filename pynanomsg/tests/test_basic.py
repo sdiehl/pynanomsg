@@ -1,5 +1,6 @@
 from pynanomsg import *
 from unittest import skip
+from time import sleep
 
 def test_reqrep():
     dom = Domain(AF_SP)
@@ -42,4 +43,5 @@ def test_pubsub():
 
     msg = 'ABC'
     sock_a.send(msg)
+    sleep(1)
     assert sock_b.recv(3) == msg
