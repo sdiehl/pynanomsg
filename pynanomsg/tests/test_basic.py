@@ -1,47 +1,56 @@
 from pynanomsg import *
-from unittest import skip
 from time import sleep
+import unittest
 
-def test_reqrep():
-    dom = Domain(AF_SP)
-    sock_a = dom.socket(REQ)
-    sock_a.bind('inproc://a')
+class TestReqRep(unittest.TestCase):
 
-    sock_b = dom.socket(REP)
-    sock_b.connect('inproc://a')
+    def test_reqrep(self):
+        dom = Domain(AF_SP)
+        sock_a = dom.socket(REQ)
+        sock_a.connect('inproc://a')
 
-    msg = 'ABC'
-    sock_a.send(msg)
-    assert sock_b.recv(3) == msg
+        sock_b = dom.socket(REP)
+        sock_b.bind('inproc://a')
 
-    sock_a.close()
-    sock_b.close()
+        msg = 'ABC'
+        sock_a.send(msg)
+        assert sock_b.recv(3) == msg
 
-def test_pair():
-    dom = Domain(AF_SP)
-    sock_a = dom.socket(PAIR)
-    sock_a.bind('inproc://a')
+        sock_a.close()
+        sock_b.close()
 
-    sock_b = dom.socket(PAIR)
-    sock_b.connect('inproc://a')
+class TestPair(unittest.TestCase):
 
-    msg = 'ABC'
-    sock_a.send(msg)
-    assert sock_b.recv(3) == msg
+    def test_pair(self):
+        dom = Domain(AF_SP)
+        sock_a = dom.socket(PAIR)
+        sock_a.bind('inproc://a')
 
-    sock_a.close()
-    sock_b.close()
+        sock_b = dom.socket(PAIR)
+        sock_b.connect('inproc://a')
 
-def test_pubsub():
-    dom = Domain(AF_SP)
-    sock_a = dom.socket(PUB)
-    sock_a.bind('inproc://a')
+        msg = 'ABC'
+        sock_a.send(msg)
+        assert sock_b.recv(3) == msg
 
-    sock_b = dom.socket(SUB)
-    sock_b.connect('inproc://a')
-    sock_b.setsockopt(SUBSCRIBE, "");
+        sock_a.close()
+        sock_b.close()
 
-    msg = 'ABC'
-    sock_a.send(msg)
-    sleep(1)
-    assert sock_b.recv(3) == msg
+class TestPubSub(unittest.TestCase):
+
+    def test_pubsub(self):
+        dom = Domain(AF_SP)
+        sock_a = dom.socket(PUB)
+        sock_a.bind('inproc://a')
+
+        sock_b = dom.socket(SUB)
+        sock_b.connect('inproc://a')
+        sock_b.setsockopt(SUB, SUB_SUBSCRIBE, "");
+
+        msg = 'ABC'
+        sock_a.send(msg)
+        sleep(1)
+        assert sock_b.recv(3) == msg
+
+if __name__ == '__main__':
+    unittest.main()
