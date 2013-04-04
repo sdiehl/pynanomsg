@@ -7,10 +7,12 @@ build: $(SRCS)
 test:
 	python -munittest discover -s pynanomsg/tests
 
+install:
+	python setup.py install
+
 clean:
 	rm -f pynanomsg/*.pyc
 	rm -f pynanomsg/tests/*.pyc
 	rm -f pynanomsg/*.c
 	rm -f pynanomsg/*.so
 	rm -rf build
-
