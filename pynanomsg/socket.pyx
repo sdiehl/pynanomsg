@@ -67,11 +67,11 @@ cdef class Socket:
             rc = nn_shutdown(self.handle, cid)
         assert rc == 0
 
-    cpdef setsockopt(self, int level, int option, char* optval):
-        cdef size_t optvallen = len(optval)
+    cpdef setsockopt(self, int level, int option, int optval):
+        # all current options are of type int, so only support that
+        cdef size_t optlen = sizeof(optval)
         with nogil:
-            rc = nn_setsockopt(self.handle, level,
-                    option, <void*>optval, optvallen)
+            rc = nn_setsockopt(self.handle, level, option, &optval, optlen)
 
     cpdef getsockopt(self, int option, int flags):
         raise NotImplementedError
