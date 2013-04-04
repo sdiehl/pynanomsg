@@ -62,6 +62,11 @@ cdef class Socket:
             rc = nn_connect(self.handle, addr)
         assert rc > -1
 
+    def shutdown(self, int cid):
+        with nogil:
+            rc = nn_shutdown(self.handle, cid)
+        assert rc == 0
+
     cpdef setsockopt(self, int level, int option, char* optval):
         cdef size_t optvallen = len(optval)
         with nogil:
