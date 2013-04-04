@@ -83,8 +83,8 @@ cdef class Socket:
         try:
             with nogil:
                 rc = nn_recv(self.handle, buf, length, flags);
-            msg = PyString_FromStringAndSize(buf, length)
             assert rc > -1
+            msg = PyString_FromStringAndSize(buf, rc)
             return msg
         finally:
             free(buf)
