@@ -31,7 +31,7 @@ setup(
     license='MIT',
     platforms = ['any'],
     classifiers=[],
-    packages='pynanomsg',
+    packages=['pynanomsg'],
     cmdclass = {
         'build_ext' : build_ext,
     },

@@ -24,11 +24,12 @@ Example
 from pynanomsg import *
 
 dom = Domain(AF_SP)
-sock_a = dom.socket(REQ)
-sock_a.bind('inproc://a')
 
 sock_b = dom.socket(REP)
-sock_b.connect('inproc://a')
+sock_b.bind('inproc://a')
+
+sock_a = dom.socket(REQ)
+sock_a.connect('inproc://a')
 
 msg = 'ABC'
 sock_a.send(msg)
