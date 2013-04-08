@@ -1,14 +1,16 @@
 _SRCS= constants.pyx nanomsg.pxd socket.pyx
 SRCS=$(addprefix pynanomsg/,$(_SRCS))
 
+PYTHON=python
+
 build: $(SRCS)
-	python setup.py build_ext --inplace
+	$(PYTHON) setup.py build_ext --inplace
 
 test:
-	python -munittest discover -s pynanomsg/tests
+	$(PYTHON) -munittest discover -s pynanomsg/tests
 
 install:
-	python setup.py install
+	$(PYTHON) setup.py install
 
 clean:
 	rm -f pynanomsg/*.pyc
